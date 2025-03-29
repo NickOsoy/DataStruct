@@ -1,5 +1,7 @@
 package umg.edu.progra.listas;
 
+import umg.edu.progra.listas.doblementeEnlazada.DoblementeEnlazada;
+
 /**
  *
  * @author Walter Cordova
@@ -51,7 +53,7 @@ public class Principal {
         
 		 // Resolver lo que se solicita a continuacion
         // Ejercicio 1: Ordenar la lista de forma ascendente
-        ordenarListaAscendente(lista);
+        lista.ordenarListaAscendente(lista);
         System.out.println("\nLista ordenada de forma ascendente:");
         lista.visualizar();
         
@@ -63,7 +65,7 @@ public class Principal {
         otraLista.insertarCabezaLista(8);
         otraLista.insertarCabezaLista(9);
 
-        unirListas(lista, otraLista);
+        lista.unirListas(lista, otraLista);
         System.out.println("\nUnir dos listas:");
         lista.visualizar();
 
@@ -73,68 +75,14 @@ public class Principal {
         Lista listaPares = new Lista();
         Lista listaImpares = new Lista();
 
-        separarParesImpares(lista, listaPares, listaImpares);
+        lista.separarParesImpares(lista, listaPares, listaImpares);
         System.out.println("\nSepara números pares:");
         listaPares.visualizar();
 
         System.out.println("\nSeparar números impares:");
         listaImpares.visualizar();
-    }
+    
 
     
-    ///Metodos pra resolver los ejercicion
-    // Método para ordenar la lista de forma ascendente
-    public static void ordenarListaAscendente(Lista lista) {
-        // Convertir la lista en un array para ordenarla
-        int tamaño = lista.obtenerTamaño();
-        int[] array = new int[tamaño];
-        Nodo actual = lista.leerPrimero();
-
-        // Llenar el array con los datos de la lista
-        for (int i = 0; i < tamaño; i++) {
-            array[i] = actual.dato;
-            actual = actual.enlace;
-        }
-
-        // Ordenar el array
-        java.util.Arrays.sort(array);
-
-        // Limpiar la lista original
-        while (lista.leerPrimero() != null) {
-            lista.eliminar(lista.leerPrimero().dato);
-        }
-
-        // Reconstruir la lista con los datos ordenados
-        for (int i = tamaño - 1; i >= 0; i--) {
-            lista.insertarCabezaLista(array[i]);
-        }
-    }
-
-    // Método para unir dos listas enlazadas
-    public static void unirListas(Lista lista1, Lista lista2) {
-        Nodo actual = lista1.leerPrimero();
-
-        // Recorrer la primera lista hasta el final
-        while (actual.enlace != null) {
-            actual = actual.enlace;
-        }
-
-        // Enlazar el último nodo de la primera lista con el primer nodo de la segunda lista
-        actual.enlace = lista2.leerPrimero();
-    }
-
-    // Método para separar números pares e impares
-    public static void separarParesImpares(Lista lista, Lista listaPares, Lista listaImpares) {
-        Nodo actual = lista.leerPrimero();
-
-        while (actual != null) {
-            if (actual.dato % 2 == 0) {
-                listaPares.insertarCabezaLista(actual.dato); // Insertar en lista de pares
-            } else {
-                listaImpares.insertarCabezaLista(actual.dato); // Insertar en lista de impares
-            }
-            actual = actual.enlace;
-        }
-    
-}
-}
+    }   
+}   
